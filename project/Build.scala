@@ -10,7 +10,7 @@ object KafkaUtilsBuild extends Build {
   def graphiteReporterSettings =  assemblySettings ++ Seq(
 
     version := "0.1.0-SNAPSHOT",
-    scalaVersion := "2.10.5",
+    scalaVersion := "2.11.4",
     name := "kafka-offset-monitor-graphite",
 
     mergeStrategy in assembly := {
@@ -25,7 +25,7 @@ object KafkaUtilsBuild extends Build {
       "com.quantifind" % "kafkaoffsetmonitor_2.11" % "0.4.6-SNAPSHOT",
       "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
 
-      "org.scalatest" % "scalatest_2.10" % "2.2.4" % "test",
+      "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
       "com.jayway.awaitility" % "awaitility" % "1.6.1" % "test"
     ),
 
