@@ -8,6 +8,9 @@ import com.codahale.metrics.graphite.{GraphiteReporter, Graphite}
 import com.google.common.cache._
 import com.quantifind.kafka.OffsetGetter.OffsetInfo
 import com.codahale.metrics.Gauge
+import com.signalfx.codahale._
+import com.signalfx.codahale.reporter.SignalFxReporter
+
 
 class OffsetGraphiteReporter (pluginsArgs: String) extends com.quantifind.kafka.offsetapp.OffsetInfoReporter {
 
@@ -24,6 +27,15 @@ class OffsetGraphiteReporter (pluginsArgs: String) extends com.quantifind.kafka.
     .build(graphite)
 
   reporter.start(GraphiteReporterArguments.graphiteReportPeriod, TimeUnit.SECONDS)
+
+  // Send offset metrics to signalfx
+  // Hardcoding key values for the time being.
+  val signalFxReporter = new SignalFxReporter.Builder(metrics, "hDlqZogIdGTFCbQHpmNiNQ").build()
+
+  signalFxReporter.start(30, TimeUnit.SECONDS)
+
+  val metricMetadata = signalFxReporter.getMetricMetadata()
+  val sfxMetrics = new SfxMetrics(metrics, metricMetadata)
 
   val removalListener : RemovalListener[String, GaugesValues] = new RemovalListener[String, GaugesValues] {
     override def onRemoval(removalNotification: RemovalNotification[String, GaugesValues]) = {

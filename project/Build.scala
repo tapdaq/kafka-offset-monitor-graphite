@@ -24,6 +24,7 @@ object KafkaUtilsBuild extends Build {
       "com.google.guava" % "guava" % "18.0",
       "com.quantifind" % "kafkaoffsetmonitor_2.11" % "0.4.6-SNAPSHOT",
       "io.dropwizard.metrics" % "metrics-graphite" % "3.1.2",
+      "com.signalfx.public" % "signalfx-codahale" % "0.2.1" % "provided",
 
       "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
       "com.jayway.awaitility" % "awaitility" % "1.6.1" % "test"
